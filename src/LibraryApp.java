@@ -89,10 +89,7 @@ public class LibraryApp {
 	public static void writeToFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		File file = filePath.toFile();
-
-		Book a = new Book();
-		a.setAuthor("Tyree");
-		a.setTitle("Book");
+		
 
 		try {
 			
@@ -100,7 +97,6 @@ public class LibraryApp {
 			// appends data to the end of the file
 			// false rewrites over the file
 			PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
-			outW.println(a);
 			outW.close(); // mandatory: this needs to be closed when you are done or it may not write all
 							// of your stuff
 			// to the file
@@ -113,15 +109,23 @@ public class LibraryApp {
 	public static void readFromFile(String diretoryFolder, String fileName) {
 		Path filePath = Paths.get(diretoryFolder, fileName);
 		File file = filePath.toFile();
+		
+		
 
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader reader = new BufferedReader(fr);
 
 			String line = reader.readLine();
+			String[] bookLine = new String[4];
 
 			while (line != null) {
-				System.out.println(line);
+				//System.out.println(line);
+				bookLine = line.split(",");
+//				System.out.println(bookLine[0]);
+//				Book a = new Book();
+//				a.setTitle(title);
+				
 				line = reader.readLine();
 			}
 			reader.close();
