@@ -12,12 +12,18 @@ import java.util.Scanner;
 
 public class LibraryApp {
 	public static void main(String[] args) {
+		
+		// initiate scanner
 		Scanner scan = new Scanner(System.in);
+		
+		//initialize variables
 		String directoryFolder = "library";
 		String fileName = "library.txt";
+
 		createDirectory();
 		createFile(directoryFolder, fileName);
 		//writeToFile(directoryFolder, fileName);
+
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
 		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
@@ -35,9 +41,9 @@ public class LibraryApp {
 				if (userChoice == 1) {
 					LibraryApp.readFromFile(directoryFolder, fileName);
 				} else if (userChoice == 2) {
-					String userAuthor = LabValidator.getString(scan, "Enter the Author's name: ");
+					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: " ,"^[A-z]+${30}" );
 				} else if (userChoice == 3) {
-					String userKeyword = LabValidator.getString(scan, "Enter the Title's keyword name: ");
+					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: " , "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
 				}
@@ -47,6 +53,8 @@ public class LibraryApp {
 		}
 	}
 
+	
+//METHODS GO HERE
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
