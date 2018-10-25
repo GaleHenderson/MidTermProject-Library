@@ -15,8 +15,8 @@ public class LibraryApp {
 		Scanner scan = new Scanner(System.in);
 		String directoryFolder = "library";
 		String fileName = "library.txt";
-		createDirectory();
-		createFile(directoryFolder, fileName);
+//		createDirectory();
+//		createFile(directoryFolder, fileName);
 		writeToFile(directoryFolder, fileName);
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
