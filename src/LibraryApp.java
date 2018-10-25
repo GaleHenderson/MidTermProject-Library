@@ -12,12 +12,18 @@ import java.util.Scanner;
 
 public class LibraryApp {
 	public static void main(String[] args) {
+		
+		// initiate scanner
 		Scanner scan = new Scanner(System.in);
+		
+		//initialize variables
 		String directoryFolder = "library";
 		String fileName = "library.txt";
-		createDirectory();
-		createFile(directoryFolder, fileName);
+		
+		//method call to write info to book database file
 		writeToFile(directoryFolder, fileName);
+		
+		//greet user and ask what they want to do
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
 		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
@@ -47,6 +53,8 @@ public class LibraryApp {
 		}
 	}
 
+	
+//METHODS GO HERE
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
