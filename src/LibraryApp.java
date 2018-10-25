@@ -12,17 +12,17 @@ import java.util.Scanner;
 
 public class LibraryApp {
 	public static void main(String[] args) {
-		
+
 		// initiate scanner
 		Scanner scan = new Scanner(System.in);
-		
-		//initialize variables
+
+		// initialize variables
 		String directoryFolder = "library";
 		String fileName = "library.txt";
 
 		createDirectory();
 		createFile(directoryFolder, fileName);
-		//writeToFile(directoryFolder, fileName);
+		// writeToFile(directoryFolder, fileName);
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
@@ -41,9 +41,9 @@ public class LibraryApp {
 				if (userChoice == 1) {
 					LibraryApp.readFromFile(directoryFolder, fileName);
 				} else if (userChoice == 2) {
-					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: " ,"^[A-z]+${30}" );
+					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
 				} else if (userChoice == 3) {
-					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: " , "^[A-z]+${30}");
+					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
 				}
@@ -53,7 +53,6 @@ public class LibraryApp {
 		}
 	}
 
-	
 //METHODS GO HERE
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
@@ -89,7 +88,6 @@ public class LibraryApp {
 	public static void writeToFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		File file = filePath.toFile();
-		
 
 		try {
 			// the true parameter for the FileOutputStream() constructor
@@ -108,8 +106,6 @@ public class LibraryApp {
 	public static void readFromFile(String diretoryFolder, String fileName) {
 		Path filePath = Paths.get(diretoryFolder, fileName);
 		File file = filePath.toFile();
-		
-		
 
 		try {
 			FileReader fr = new FileReader(file);
@@ -117,14 +113,21 @@ public class LibraryApp {
 
 			String line = reader.readLine();
 			String[] bookLine = new String[4];
-
+			
+			// it still needs to be formatted into a table and the status needs to be
+			// converted to a boolean but we now have data we can manipulate from the text
+			// file :)
 			while (line != null) {
-				//System.out.println(line);
+				// System.out.println(line);
 				bookLine = line.split(",");
 //				System.out.println(bookLine[0]);
-//				Book a = new Book();
-//				a.setTitle(title);
-				
+				Book a = new Book();
+				System.out.println();
+				a.setTitle(bookLine[0]);
+				a.setAuthor(bookLine[1]);
+//				a.setStatus(bookLine[2]); is erroring out because it needs to be cast from String to boolean
+				a.setDueDate(bookLine[3]);
+				System.out.println(a);
 				line = reader.readLine();
 			}
 			reader.close();
