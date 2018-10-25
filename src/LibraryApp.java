@@ -17,7 +17,7 @@ public class LibraryApp {
 		String fileName = "library.txt";
 		createDirectory();
 		createFile(directoryFolder, fileName);
-		writeToFile(directoryFolder, fileName);
+		//writeToFile(directoryFolder, fileName);
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
 		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
@@ -82,14 +82,16 @@ public class LibraryApp {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		File file = filePath.toFile();
 
-		// Book a = new Book();
+		Book a = new Book();
+		a.setAuthor("Tyree");
+		a.setTitle("Book");
 
 		try {
 			// the true parameter for the FileOutputStream() constructor
 			// appends data to the end of the file
 			// false rewrites over the file
 			PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
-			// outW.println(a);
+			outW.println(a);
 			outW.close(); // mandatory: this needs to be closed when you are done or it may not write all
 							// of your stuff
 			// to the file

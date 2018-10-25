@@ -1,0 +1,12 @@
+Pride and Prejudice, Jane Austen, true, 2 weeks
+To Kill A Mockingbird, Harper Lee, true, 2 weeks
+Twilight,  Stephenie Meyer, true, 2 weeks
+The Hunger Games, Suzanne Collins, true, 2 weeks
+Harry Potter, J. K. Rowling, true, 2 weeks
+The Book Thief, Markus Zusak, true, 2 weeks
+Animal Farm, George Orwell, true, 2 weeks
+Gone with the Wind, Margaret Mitchell, true, 2 weeks
+The Chronicles of Narnia, C. S. Lewis, true, 2 weeks
+The Fault in Our Stats, John Green, true, 2 weeks
+The Giving Tree, Shel Silverstein, true, 2 weeks
+Wuthering Heights, Emily Bronte, true, 2 weeks
