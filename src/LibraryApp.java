@@ -35,9 +35,9 @@ public class LibraryApp {
 				if (userChoice == 1) {
 					LibraryApp.readFromFile(directoryFolder, fileName);
 				} else if (userChoice == 2) {
-					String userAuthor = LabValidator.getString(scan, "Enter the Author's name: ");
+					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: " ,"^[A-z]+${30}" );
 				} else if (userChoice == 3) {
-					String userKeyword = LabValidator.getString(scan, "Enter the Title's keyword name: ");
+					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: " , "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
 				}

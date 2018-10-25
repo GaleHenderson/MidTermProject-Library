@@ -98,7 +98,7 @@ public class LabValidator {
 			if (input.matches(regex)) {
 			valid = true;
 		} else {
-			System.out.println(" Input must match the right format: ");
+			System.out.println("Input must match correct format");
 			valid = false;
 		}
 		} while (!valid);
