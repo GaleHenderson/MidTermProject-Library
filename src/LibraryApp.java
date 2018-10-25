@@ -95,6 +95,7 @@ public class LibraryApp {
 		a.setTitle("Book");
 
 		try {
+			
 			// the true parameter for the FileOutputStream() constructor
 			// appends data to the end of the file
 			// false rewrites over the file
