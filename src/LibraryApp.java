@@ -35,8 +35,7 @@ public class LibraryApp {
 				System.out.println("1 - See list of books");
 				System.out.println("2 - Search by author");
 				System.out.println("3 - Search by keyword");
-				System.out.println("4 - Select a book to checkout");
-				System.out.println("5 - Return to main menu");
+				System.out.println("4 - Return to main menu");
 
 				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
 				if (userChoice == 1) {
@@ -44,6 +43,10 @@ public class LibraryApp {
 					int counter = 1;
 					for (Book book : books ) {
 						System.out.println(counter++ + ". " +book);
+					}
+					String user1st = LabValidator.getString(scan, "Would you like to check out a book? y/n");
+					if (user1st.equalsIgnoreCase("y")) {
+						
 					}
 				} else if (userChoice == 2) {
 					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
