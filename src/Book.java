@@ -5,8 +5,17 @@ public class Book {
 	private String author;
 	private boolean status;
 	private String dueDate;
+	
+	
 	public String getTitle() {
 		return title;
+	}
+	public Book() {
+		super();
+		this.title = title;
+		this.author = author;
+		this.status = status;
+		this.dueDate = dueDate;
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -31,7 +40,10 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return title + "," + author + "," + status + "," + dueDate;
+
+		
+		return title + " ," + " Author:  " + author;
+		//return title + "," + author + "," + status + "," + dueDate;
 	}
 	
 	

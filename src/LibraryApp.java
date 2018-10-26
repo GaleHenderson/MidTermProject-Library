@@ -122,11 +122,13 @@ public class LibraryApp {
 			while (line != null) {
 				//System.out.println(line);
 				bookLine = line.split(",");
-//				System.out.println(bookLine[0]);
-//				Book a = new Book();
-//				a.setTitle(title);
-				
-				line = reader.readLine();
+		   //  System.out.println(bookLine[0]);
+				Book a = new Book();
+	  //       a.setAuthor(author);
+	//	     a.setDueDate(dueDate);
+	//	     a.setStatus(status);
+	//	     a.setTitle(title);
+	//			line = reader.readLine();
 			}
 			reader.close();
 
