@@ -11,8 +11,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -23,10 +21,14 @@ public class LibraryApp {
 		String directoryFolder = "library";
 		String fileName = "library.txt";
 
-		createDirectory();
-		createFile(directoryFolder, fileName);
+		// createDirectory();
+		// createFile(directoryFolder, fileName);
+
 		// writeToFile(directoryFolder, fileName);
-	        	ArrayList<Book>  books = new ArrayList<>();
+		ArrayList<Book> books = new ArrayList<>();
+
+		// writeToFile(directoryFolder, fileName);
+
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
 		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
@@ -43,16 +45,17 @@ public class LibraryApp {
 				if (userChoice == 1) {
 					books = readFromFile(directoryFolder, fileName);
 					int counter = 1;
-					for (Book book : books ) {
-						System.out.println(counter++ + ". " +book);
+					for (Book book : books) {
+						System.out.println(counter++ + ". " + book);
 					}
 					String user1st = LabValidator.getString(scan, "Would you like to check out a book? y/n");
 					if (user1st.equalsIgnoreCase("y")) {
-						
+
 					}
 				} else if (userChoice == 2) {
-					//String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
-					searchForAuthorOfBook(books);
+					// String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ",
+					// "^[A-z]+${30}");
+					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 				} else if (userChoice == 3) {
 					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
@@ -64,46 +67,50 @@ public class LibraryApp {
 		}
 	}
 
+	public static void searchForAuthorOfBook(Scanner scan, ArrayList<Book> bookArrayList) {
 
-	public static void searchForAuthorOfBook(ArrayList<Book> bookArrayList) {
-
-		Scanner scan = new Scanner(System.in);
-		String userSelection = null;
+		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
 		int available = 0;
-
-		int i = 0;
-		// if (userInput == 1) {
-		System.out.println("Please enter the name of the author.");
-		userSelection = LabValidator.myRegex(scan, "  ", "^[A-z]+${30}");
-		
-		 
-		 
-		      for (i = 0 ;  i <  bookArrayList.size() ; i ++)      {
-		 
-
-			if (bookArrayList.get(i).getAuthor().contains(userSelection)) {
-				
-				System.out.println(bookArrayList.get(i).getAuthor() +  " has been added to your check out list would you like to check this out?");
-				
+		for (Book book : bookArrayList) {
+			if (book.getAuthor().contains(userSelection)) {
+				System.out.println(book);
 				available = available + 1;
 			}
-			
-			else if (available < 1) {
-				System.out.println("Sorry thats not available");
-				break;
-			}
-		 
-		 }
-		 }
-		 
-	
-	
-	
-	
-	
-	
-	
-	
+
+		}
+
+		if (available < 1) {
+			System.out.println("Sorry thats not available");
+
+		}
+
+	}
+
+//		
+//
+//
+//		// if (userInput == 1) {
+//		
+//		String userSelection = LabValidator.getString(scan,"Please enter the name of the author.");
+//
+//				//LabValidator.myRegex(scan, "  ", "^[A-z]+${30}");
+//		for (int i = 0; i < bookArrayList.size(); i++) {
+//
+//			if (bookArrayList.get(i).getAuthor().equalsIgnoreCase(userSelection)) {
+//
+//				System.out.println(bookArrayList.get(i).getAuthor()
+//						+ " has been added to your check out list would you like to check this out?");
+//
+//				available = available + 1;
+//			}
+//
+//			else if (available < 1) {
+//				System.out.println("Sorry thats not available");
+//				break;
+//			}
+//
+//		}
+
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
@@ -140,7 +147,6 @@ public class LibraryApp {
 		File file = filePath.toFile();
 
 		try {
-			
 			// the true parameter for the FileOutputStream() constructor
 			// appends data to the end of the file
 			// false rewrites over the file
@@ -165,11 +171,9 @@ public class LibraryApp {
 
 			String line = reader.readLine();
 			String[] bookLine = new String[4];
-			
-			
+
 			while (line != null) {
 				bookLine = line.split(",");
-
 
 				Book a = new Book();
 				a.setTitle(bookLine[0]);
@@ -181,7 +185,6 @@ public class LibraryApp {
 
 			}
 			reader.close();
-
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!");
 			e.printStackTrace();
