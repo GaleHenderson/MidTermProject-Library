@@ -62,6 +62,76 @@ public class LibraryApp {
 	}
 
 //METHODS GO HERE
+	
+	public static void searchForAuthorOfBook(ArrayList<Books> bookArrayList) {
+
+        Scanner scan = new Scanner(System.in);
+        String userSelection = null;
+        int available = 0;
+
+        int i = 0;
+        // if (userInput == 1) {
+        System.out.println("Please enter the name of the author.");
+        userSelection = Validating.myRegex(scan, "  ", "^[A-z]+${30}");
+        
+        
+        
+              for (i = 0 ;  i <  bookArrayList.size() ; i ++)      {
+         {
+
+            if (bookArrayList.get(i).getAuthor().contains(userSelection)) {
+                
+                System.out.println(bookArrayList.get(i).getAuthor() +  " has been added to your check out list would you like to check this out?");
+                
+                available = available + 1;
+            }
+            
+            else if (available < 1) {
+                System.out.println("Sorry thats not available");
+                break;
+            }
+         }
+        
+        
+        }
+
+    }
+    public static void SearchForTitleOfBook (ArrayList<Books> searchForTitle)   {
+        
+        Scanner scan = new Scanner(System.in);
+        String userSelection = null;
+        int available = 0;
+
+        int i = 0;
+        // if (userInput == 1) {
+        System.out.println("Please enter the name of the book your looking for.");
+        userSelection = Validating.myRegex(scan, "  ", "^[A-z]+${30}");
+        
+        
+        
+              for (i = 0 ;  i <  searchForTitle.size() ;i ++)      {
+         {
+
+            if (searchForTitle.get(i).getAuthor().contains(userSelection)) {
+
+    System.out.println(userSelection +  " has been added to your check out list would you like to check this out?");
+                
+                available = available + 1;
+            }
+            
+            else if (available < 1) {
+                System.out.println("Sorry thats not available");
+                break;
+            }
+         }
+        
+        
+        }
+        
+    }
+
+}
+	
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
