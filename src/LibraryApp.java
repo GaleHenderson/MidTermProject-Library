@@ -62,76 +62,6 @@ public class LibraryApp {
 	}
 
 //METHODS GO HERE
-	
-	public static void searchForAuthorOfBook(ArrayList<Books> bookArrayList) {
-
-        Scanner scan = new Scanner(System.in);
-        String userSelection = null;
-        int available = 0;
-
-        int i = 0;
-        // if (userInput == 1) {
-        System.out.println("Please enter the name of the author.");
-        userSelection = Validating.myRegex(scan, "  ", "^[A-z]+${30}");
-        
-        
-        
-              for (i = 0 ;  i <  bookArrayList.size() ; i ++)      {
-         {
-
-            if (bookArrayList.get(i).getAuthor().contains(userSelection)) {
-                
-                System.out.println(bookArrayList.get(i).getAuthor() +  " has been added to your check out list would you like to check this out?");
-                
-                available = available + 1;
-            }
-            
-            else if (available < 1) {
-                System.out.println("Sorry thats not available");
-                break;
-            }
-         }
-        
-        
-        }
-
-    }
-    public static void SearchForTitleOfBook (ArrayList<Books> searchForTitle)   {
-        
-        Scanner scan = new Scanner(System.in);
-        String userSelection = null;
-        int available = 0;
-
-        int i = 0;
-        // if (userInput == 1) {
-        System.out.println("Please enter the name of the book your looking for.");
-        userSelection = Validating.myRegex(scan, "  ", "^[A-z]+${30}");
-        
-        
-        
-              for (i = 0 ;  i <  searchForTitle.size() ;i ++)      {
-         {
-
-            if (searchForTitle.get(i).getAuthor().contains(userSelection)) {
-
-    System.out.println(userSelection +  " has been added to your check out list would you like to check this out?");
-                
-                available = available + 1;
-            }
-            
-            else if (available < 1) {
-                System.out.println("Sorry thats not available");
-                break;
-            }
-         }
-        
-        
-        }
-        
-    }
-
-}
-	
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
@@ -168,7 +98,6 @@ public class LibraryApp {
 		File file = filePath.toFile();
 
 		try {
-			
 			// the true parameter for the FileOutputStream() constructor
 			// appends data to the end of the file
 			// false rewrites over the file
@@ -197,19 +126,6 @@ public class LibraryApp {
 			
 			while (line != null) {
 				bookLine = line.split(",");
-<<<<<<< HEAD
-
-		   //  System.out.println(bookLine[0]);
-				Book a = new Book();
-	  //       a.setAuthor(author);
-	//	     a.setDueDate(dueDate);
-	//	     a.setStatus(status);
-	//	     a.setTitle(title);
-	//			line = reader.readLine();
-=======
-//				System.out.println(bookLine[0]);
-=======
->>>>>>> a9e3a03db312f6a8ec5a5fe56e744b36ff694bc3
 				Book a = new Book();
 				a.setTitle(bookLine[0]);
 				a.setAuthor(bookLine[1]);
@@ -217,7 +133,6 @@ public class LibraryApp {
 				a.setDueDate(bookLine[3]);
 				bookList.add(a);
 				line = reader.readLine();
->>>>>>> e6a3110f0fa1ba199cb03d37b492c6383130c90a
 			}
 			reader.close();
 
