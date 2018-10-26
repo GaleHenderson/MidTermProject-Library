@@ -23,7 +23,7 @@ public class LibraryApp {
 
 		createDirectory();
 		createFile(directoryFolder, fileName);
-		// writeToFile(directoryFolder, fileName);
+		writeToFile(directoryFolder, fileName);
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
