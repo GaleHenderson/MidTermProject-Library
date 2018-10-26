@@ -168,6 +168,7 @@ public class LibraryApp {
 		File file = filePath.toFile();
 
 		try {
+			
 			// the true parameter for the FileOutputStream() constructor
 			// appends data to the end of the file
 			// false rewrites over the file
@@ -196,6 +197,19 @@ public class LibraryApp {
 			
 			while (line != null) {
 				bookLine = line.split(",");
+<<<<<<< HEAD
+
+		   //  System.out.println(bookLine[0]);
+				Book a = new Book();
+	  //       a.setAuthor(author);
+	//	     a.setDueDate(dueDate);
+	//	     a.setStatus(status);
+	//	     a.setTitle(title);
+	//			line = reader.readLine();
+=======
+//				System.out.println(bookLine[0]);
+=======
+>>>>>>> a9e3a03db312f6a8ec5a5fe56e744b36ff694bc3
 				Book a = new Book();
 				a.setTitle(bookLine[0]);
 				a.setAuthor(bookLine[1]);
@@ -203,6 +217,7 @@ public class LibraryApp {
 				a.setDueDate(bookLine[3]);
 				bookList.add(a);
 				line = reader.readLine();
+>>>>>>> e6a3110f0fa1ba199cb03d37b492c6383130c90a
 			}
 			reader.close();
 
