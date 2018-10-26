@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -24,7 +26,7 @@ public class LibraryApp {
 		createDirectory();
 		createFile(directoryFolder, fileName);
 		// writeToFile(directoryFolder, fileName);
-
+	        	ArrayList<Book>  books = new ArrayList<>();
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
 		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
@@ -39,7 +41,7 @@ public class LibraryApp {
 
 				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
 				if (userChoice == 1) {
-					ArrayList<Book> books = readFromFile(directoryFolder, fileName);
+					books = readFromFile(directoryFolder, fileName);
 					int counter = 1;
 					for (Book book : books ) {
 						System.out.println(counter++ + ". " +book);
@@ -49,7 +51,8 @@ public class LibraryApp {
 						
 					}
 				} else if (userChoice == 2) {
-					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
+					//String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
+					searchForAuthorOfBook(books);
 				} else if (userChoice == 3) {
 					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
@@ -61,7 +64,46 @@ public class LibraryApp {
 		}
 	}
 
-//METHODS GO HERE
+
+	public static void searchForAuthorOfBook(ArrayList<Book> bookArrayList) {
+
+		Scanner scan = new Scanner(System.in);
+		String userSelection = null;
+		int available = 0;
+
+		int i = 0;
+		// if (userInput == 1) {
+		System.out.println("Please enter the name of the author.");
+		userSelection = LabValidator.myRegex(scan, "  ", "^[A-z]+${30}");
+		
+		 
+		 
+		      for (i = 0 ;  i <  bookArrayList.size() ; i ++)      {
+		 
+
+			if (bookArrayList.get(i).getAuthor().contains(userSelection)) {
+				
+				System.out.println(bookArrayList.get(i).getAuthor() +  " has been added to your check out list would you like to check this out?");
+				
+				available = available + 1;
+			}
+			
+			else if (available < 1) {
+				System.out.println("Sorry thats not available");
+				break;
+			}
+		 
+		 }
+		 }
+		 
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		if (Files.notExists(filePath)) {
@@ -127,19 +169,8 @@ public class LibraryApp {
 			
 			while (line != null) {
 				bookLine = line.split(",");
-<<<<<<< HEAD
 
-		   //  System.out.println(bookLine[0]);
-				Book a = new Book();
-	  //       a.setAuthor(author);
-	//	     a.setDueDate(dueDate);
-	//	     a.setStatus(status);
-	//	     a.setTitle(title);
-	//			line = reader.readLine();
-=======
-//				System.out.println(bookLine[0]);
-=======
->>>>>>> a9e3a03db312f6a8ec5a5fe56e744b36ff694bc3
+
 				Book a = new Book();
 				a.setTitle(bookLine[0]);
 				a.setAuthor(bookLine[1]);
@@ -147,7 +178,7 @@ public class LibraryApp {
 				a.setDueDate(bookLine[3]);
 				bookList.add(a);
 				line = reader.readLine();
->>>>>>> e6a3110f0fa1ba199cb03d37b492c6383130c90a
+
 			}
 			reader.close();
 
