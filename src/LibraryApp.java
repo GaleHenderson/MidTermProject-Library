@@ -129,6 +129,7 @@ public class LibraryApp {
 				a.setDueDate(bookLine[3]);
 				System.out.println(a);
 				line = reader.readLine();
+				System.out.println();
 			}
 			reader.close();
 
