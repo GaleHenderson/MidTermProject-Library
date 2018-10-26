@@ -1,9 +1,19 @@
 
 
 public class Book {
+	public Book(String title, String author, String status, String dueDate) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.status = status;
+		this.dueDate = dueDate;
+	}
+	public Book() {
+		// TODO Auto-generated constructor stub
+	}
 	private String title;
 	private String author;
-	private boolean status;
+	private String status;
 	private String dueDate;
 	
 	
@@ -26,10 +36,10 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public boolean isStatus() {
+	public String isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getDueDate() {

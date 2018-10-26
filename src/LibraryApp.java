@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LibraryApp {
@@ -39,7 +40,11 @@ public class LibraryApp {
 
 				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
 				if (userChoice == 1) {
-					LibraryApp.readFromFile(directoryFolder, fileName);
+					ArrayList<Book> books = readFromFile(directoryFolder, fileName);
+					int counter = 1;
+					for (Book book : books ) {
+						System.out.println(counter++ + ". " +book);
+					}
 				} else if (userChoice == 2) {
 					String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ", "^[A-z]+${30}");
 				} else if (userChoice == 3) {
@@ -104,9 +109,10 @@ public class LibraryApp {
 		}
 	}
 
-	public static void readFromFile(String diretoryFolder, String fileName) {
+	public static ArrayList<Book> readFromFile(String diretoryFolder, String fileName) {
 		Path filePath = Paths.get(diretoryFolder, fileName);
 		File file = filePath.toFile();
+		ArrayList<Book> bookList = new ArrayList<>();
 
 		try {
 			FileReader fr = new FileReader(file);
@@ -115,12 +121,10 @@ public class LibraryApp {
 			String line = reader.readLine();
 			String[] bookLine = new String[4];
 			
-			// it still needs to be formatted into a table and the status needs to be
-			// converted to a boolean but we now have data we can manipulate from the text
-			// file :)
+			
 			while (line != null) {
-				// System.out.println(line);
 				bookLine = line.split(",");
+<<<<<<< HEAD
 
 		   //  System.out.println(bookLine[0]);
 				Book a = new Book();
@@ -131,13 +135,14 @@ public class LibraryApp {
 	//			line = reader.readLine();
 =======
 //				System.out.println(bookLine[0]);
+=======
+>>>>>>> a9e3a03db312f6a8ec5a5fe56e744b36ff694bc3
 				Book a = new Book();
-				System.out.println();
 				a.setTitle(bookLine[0]);
 				a.setAuthor(bookLine[1]);
-//				a.setStatus(bookLine[2]); is erroring out because it needs to be cast from String to boolean
+				a.setStatus(bookLine[2]);
 				a.setDueDate(bookLine[3]);
-				System.out.println(a);
+				bookList.add(a);
 				line = reader.readLine();
 >>>>>>> e6a3110f0fa1ba199cb03d37b492c6383130c90a
 			}
@@ -150,5 +155,6 @@ public class LibraryApp {
 			System.out.println("Contact customer service");
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 }
