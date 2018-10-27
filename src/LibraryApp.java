@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -24,8 +26,10 @@ public class LibraryApp {
 		// createDirectory();
 		// createFile(directoryFolder, fileName);
 
-		writeToFile(directoryFolder, fileName);
+		// writeToFile(directoryFolder, fileName);
 		ArrayList<Book> books = new ArrayList<>();
+
+		// writeToFile(directoryFolder, fileName);
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
@@ -55,26 +59,15 @@ public class LibraryApp {
 					// "^[A-z]+${30}");
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 				} else if (userChoice == 3) {
-					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
+
+					SearchForTitleOfBook(scan , readFromFile(directoryFolder , fileName));
+					//					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
 				}
 			} while (!(userChoice == 5));
 		} else if (userPick == 2) {
-			String userReturnAuthor = LabValidator.getString(scan, "Enter the Author's name");
-			String userReturnTitle = LabValidator.getString(scan, "Enter the title of the book");
-			Path filePath = Paths.get(directoryFolder, fileName);
-			File file = filePath.toFile();
-			try {
-				Book s = new Book(userReturnTitle, userReturnAuthor, "true", "2 weeks");
-				PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
-				outW.println(s);
-				outW.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			System.out.println("Bye!");
 		}
 	}
 
@@ -83,7 +76,7 @@ public class LibraryApp {
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
 		int available = 0;
 		for (Book book : bookArrayList) {
-			if (book.getAuthor().contains(userSelection)) {
+			if (book.getAuthor().contains(userSelection.toUpperCase())) {
 				System.out.println(book);
 				available = available + 1;
 			}
@@ -95,8 +88,34 @@ public class LibraryApp {
 
 		}
 
+	
 	}
+	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> searchForTitle) {
 
+		String userSelection = LabValidator.getString(scan, "Please enter the name of the book your searching for:");
+		int available = 0;
+		for (Book book : searchForTitle) {
+			if (book.getTitle().contains(userSelection.toUpperCase())) {
+				System.out.println(book);
+				
+
+				available = available + 1;
+			}
+
+		}
+
+		if (available < 1) {
+			System.out.println("Sorry thats not available");
+
+		}
+
+	}
+	
+	
+	
+	
+	
+	
 
 
 	public static void createFile(String directoryFolder, String fileName) {
@@ -164,10 +183,10 @@ public class LibraryApp {
 				bookLine = line.split(",");
 
 				Book a = new Book();
-				a.setTitle(bookLine[0]);
-				a.setAuthor(bookLine[1]);
-				a.setStatus(bookLine[2]);
-				a.setDueDate(bookLine[3]);
+				a.setTitle(bookLine[0].toUpperCase());
+				a.setAuthor(bookLine[1].toUpperCase());
+				a.setStatus(bookLine[2].toUpperCase());
+				a.setDueDate(bookLine[3].toUpperCase());
 				bookList.add(a);
 				line = reader.readLine();
 
