@@ -24,10 +24,8 @@ public class LibraryApp {
 		// createDirectory();
 		// createFile(directoryFolder, fileName);
 
-		// writeToFile(directoryFolder, fileName);
+		writeToFile(directoryFolder, fileName);
 		ArrayList<Book> books = new ArrayList<>();
-
-		// writeToFile(directoryFolder, fileName);
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
@@ -63,7 +61,20 @@ public class LibraryApp {
 				}
 			} while (!(userChoice == 5));
 		} else if (userPick == 2) {
-			System.out.println("Bye!");
+			String userReturnAuthor = LabValidator.getString(scan, "Enter the Author's name");
+			String userReturnTitle = LabValidator.getString(scan, "Enter the title of the book");
+			Path filePath = Paths.get(directoryFolder, fileName);
+			File file = filePath.toFile();
+			try {
+				Book s = new Book(userReturnTitle, userReturnAuthor, "true", "2 weeks");
+				PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
+				outW.println(s);
+				outW.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
