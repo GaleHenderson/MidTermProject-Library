@@ -86,30 +86,7 @@ public class LibraryApp {
 
 	}
 
-//		
-//
-//
-//		// if (userInput == 1) {
-//		
-//		String userSelection = LabValidator.getString(scan,"Please enter the name of the author.");
-//
-//				//LabValidator.myRegex(scan, "  ", "^[A-z]+${30}");
-//		for (int i = 0; i < bookArrayList.size(); i++) {
-//
-//			if (bookArrayList.get(i).getAuthor().equalsIgnoreCase(userSelection)) {
-//
-//				System.out.println(bookArrayList.get(i).getAuthor()
-//						+ " has been added to your check out list would you like to check this out?");
-//
-//				available = available + 1;
-//			}
-//
-//			else if (available < 1) {
-//				System.out.println("Sorry thats not available");
-//				break;
-//			}
-//
-//		}
+
 
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
