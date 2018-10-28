@@ -53,16 +53,13 @@ public class LibraryApp {
 
 					}
 				} else if (userChoice == 2) {
-					// String userAuthor = LabValidator.myRegex(scan, "Enter the Author's name: ",
-					// "^[A-z]+${30}");
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
+					
 				} else if (userChoice == 3) {
-
 					SearchForTitleOfBook(scan, readFromFile(directoryFolder, fileName));
-					// String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword
-					// name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
+					
 				}
 			} while (!(userChoice == 5));
 		} else if (userPick == 2) {
@@ -71,7 +68,8 @@ public class LibraryApp {
 			Path filePath = Paths.get(directoryFolder, fileName);
 			File file = filePath.toFile();
 			try {
-				Book s = new Book(userReturnTitle, userReturnAuthor, "true", "2 weeks");
+				String checkout = "checkout";
+				Book s = new Book(userReturnTitle, userReturnAuthor, checkout, "2 weeks");
 				PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
 				outW.println(s);
 				outW.close();
@@ -81,6 +79,7 @@ public class LibraryApp {
 			}
 		}
 	}
+	
 
 	public static void searchForAuthorOfBook(Scanner scan, ArrayList<Book> bookArrayList) {
 
@@ -92,11 +91,22 @@ public class LibraryApp {
 				System.out.println(book);
 				available = available + 1;
 			}
-
+			if (available == 1) {
+				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
+				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					System.out.println("What else would you like to do?");
+					break;
+				} else {
+					System.out.println("What else would you like to do?");
+				}
+			}
+			
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry thats not available");
+			System.out.println("Sorry that book has already been checked out or is unavailable! :(");
+			System.out.println("What else would you like to do?");
 
 		}
 
@@ -112,15 +122,25 @@ public class LibraryApp {
 
 				available = available + 1;
 			}
-
+			if (available == 1) {
+				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
+				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					
+					System.out.println("What else would you like to do?");
+					break;
+				} else {
+					System.out.println("What else would you like to do?");
+				}
+			}
+			
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry thats not available");
-
+			System.out.println("Sorry that book has already been checked out or is unavailable! :(");
+			System.out.println("What else would you like to do?");
 		}
-
-	}
+		}
 
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
