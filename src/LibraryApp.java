@@ -39,8 +39,8 @@ public class LibraryApp {
 		if (userPick == 1) {
 			do {
 				System.out.println("1 - See list of books");
-				System.out.println("2 - Search by author");
-				System.out.println("3 - Search by keyword");
+				System.out.println("2 - Search by the author");
+				System.out.println("3 - Search by the title ");
 				System.out.println("4 - Return to main menu");
 
 				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
@@ -76,7 +76,7 @@ public class LibraryApp {
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
 		int available = 0;
 		for (Book book : bookArrayList) {
-			if (book.getAuthor().contains(userSelection.toUpperCase())) {
+			if (book.getAuthor().contains(userSelection.toUpperCase())) {      // added the toUpperCase to make sure user input will be understood by the search 
 				System.out.println(book);
 				available = available + 1;
 			}
@@ -95,7 +95,7 @@ public class LibraryApp {
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the book your searching for:");
 		int available = 0;
 		for (Book book : searchForTitle) {
-			if (book.getTitle().contains(userSelection.toUpperCase())) {
+			if (book.getTitle().contains(userSelection.toUpperCase())) {         
 				System.out.println(book);
 				
 
@@ -111,12 +111,6 @@ public class LibraryApp {
 
 	}
 	
-	
-	
-	
-	
-	
-
 
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
@@ -183,7 +177,7 @@ public class LibraryApp {
 				bookLine = line.split(",");
 
 				Book a = new Book();
-				a.setTitle(bookLine[0].toUpperCase());
+				a.setTitle(bookLine[0].toUpperCase());        // added the toUpperCase to ensure that our search method will recognize any case entered by user 
 				a.setAuthor(bookLine[1].toUpperCase());
 				a.setStatus(bookLine[2].toUpperCase());
 				a.setDueDate(bookLine[3].toUpperCase());
