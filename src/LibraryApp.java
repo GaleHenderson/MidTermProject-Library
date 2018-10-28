@@ -11,8 +11,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -60,14 +58,27 @@ public class LibraryApp {
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 				} else if (userChoice == 3) {
 
-					SearchForTitleOfBook(scan , readFromFile(directoryFolder , fileName));
-					//					String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword name: ", "^[A-z]+${30}");
+					SearchForTitleOfBook(scan, readFromFile(directoryFolder, fileName));
+					// String userKeyword = LabValidator.myRegex(scan, "Enter the Title's keyword
+					// name: ", "^[A-z]+${30}");
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
 				}
 			} while (!(userChoice == 5));
 		} else if (userPick == 2) {
-			System.out.println("Bye!");
+			String userReturnAuthor = LabValidator.getString(scan, "Enter the Author's name");
+			String userReturnTitle = LabValidator.getString(scan, "Enter the title of the book");
+			Path filePath = Paths.get(directoryFolder, fileName);
+			File file = filePath.toFile();
+			try {
+				Book s = new Book(userReturnTitle, userReturnAuthor, "true", "2 weeks");
+				PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
+				outW.println(s);
+				outW.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -76,7 +87,8 @@ public class LibraryApp {
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
 		int available = 0;
 		for (Book book : bookArrayList) {
-			if (book.getAuthor().contains(userSelection.toUpperCase())) {      // added the toUpperCase to make sure user input will be understood by the search 
+			if (book.getAuthor().contains(userSelection.toUpperCase())) { // added the toUpperCase to make sure user
+																			// input will be understood by the search
 				System.out.println(book);
 				available = available + 1;
 			}
@@ -88,16 +100,15 @@ public class LibraryApp {
 
 		}
 
-	
 	}
+
 	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> searchForTitle) {
 
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the book your searching for:");
 		int available = 0;
 		for (Book book : searchForTitle) {
-			if (book.getTitle().contains(userSelection.toUpperCase())) {         
+			if (book.getTitle().contains(userSelection.toUpperCase())) {
 				System.out.println(book);
-				
 
 				available = available + 1;
 			}
@@ -110,7 +121,6 @@ public class LibraryApp {
 		}
 
 	}
-	
 
 	public static void createFile(String directoryFolder, String fileName) {
 		Path filePath = Paths.get(directoryFolder, fileName);
@@ -177,7 +187,8 @@ public class LibraryApp {
 				bookLine = line.split(",");
 
 				Book a = new Book();
-				a.setTitle(bookLine[0].toUpperCase());        // added the toUpperCase to ensure that our search method will recognize any case entered by user 
+				a.setTitle(bookLine[0].toUpperCase()); // added the toUpperCase to ensure that our search method will
+														// recognize any case entered by user
 				a.setAuthor(bookLine[1].toUpperCase());
 				a.setStatus(bookLine[2].toUpperCase());
 				a.setDueDate(bookLine[3].toUpperCase());
