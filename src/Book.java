@@ -42,7 +42,8 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return title + "," + author + "," + status + "," + dueDate;
+		return title + " by " + author + " Status: " + status; //+ "," + dueDate;
+//		return title + "," + author + "," + status + "," + dueDate; 
 	}
 	
 	

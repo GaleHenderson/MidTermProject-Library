@@ -31,7 +31,7 @@ public class LibraryApp {
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
-		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
+		int userPick = LabValidator.getInt(scan, "\nPress 1 to check out a book or 2 to return a book:  ", 1, 2);
 		int userChoice = 0;
 
 		if (userPick == 1) {
@@ -41,17 +41,30 @@ public class LibraryApp {
 				System.out.println("3 - Search by the title ");
 				System.out.println("4 - Return to main menu");
 
-				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
+				userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 4);
 				if (userChoice == 1) {
 					books = readFromFile(directoryFolder, fileName);
 					int counter = 1;
 					for (Book book : books) {
 						System.out.println(counter++ + ". " + book);
 					}
-					String user1st = LabValidator.getString(scan, "Would you like to check out a book? y/n");
-					if (user1st.equalsIgnoreCase("y")) {
+					String user1st = LabValidator.getString(scan, "\nWould you like to check out a book? Y/N  ");
+					while (user1st.equalsIgnoreCase("y")) {
+						int userChoiceForBookNumber = LabValidator.getInt(scan,
+								"Please select the number that corresponds to the book you'd like to check out:  ",
+								1, 13);
+						for (int i = 0; i < books.size() + 1; i++) {
+							if (userChoiceForBookNumber == i) {
+								System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
+								System.out.println("This book is due back in 2 weeks.\n");
+								System.out.println("Would you like to continue? Y/N  ");	
+								user1st = scan.next();
+							}
+						}
 
 					}
+
+
 				} else if (userChoice == 2) {
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 					
