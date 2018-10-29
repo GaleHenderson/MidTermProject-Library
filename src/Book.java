@@ -1,5 +1,6 @@
 
 
+
 public class Book {
 	public Book(String title, String author, String status, String dueDate) {
 		super();
@@ -34,6 +35,9 @@ public class Book {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getStatus() {
+		return status;
+	}
 	public String getDueDate() {
 		return dueDate;
 	}
@@ -42,7 +46,8 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return title + "," + author + "," + status + "," + dueDate;
+		return title + " by " + author + " Status: " + status; //+ "," + dueDate;
+//		return title + "," + author + "," + status + "," + dueDate; 
 	}
 	
 	
