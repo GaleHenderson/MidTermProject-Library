@@ -44,9 +44,12 @@ public class LibraryApp {
 					userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 4);
 					if (userChoice == 1) {
 						books = readFromFile(directoryFolder, fileName);
-						int counter = 1;
+						int counter = 1;System.out.printf("%-28s %-20s %-20s %-1s", "\tTITLE", " AUTHOR", " STATUS", "RETURN DATE"); // prints list of fruit and prices
+						System.out.println();
+						System.out.printf("%-28s %-20s %-20s %-1s", "\t-----", " ------", " ------", "------------"); // prints list of fruit and prices
+						System.out.println();
 						for (Book book : books) {
-							System.out.println(counter++ + ". " + book);
+							System.out.println(counter++ + ".\t" + book);
 						}
 						String user1st = LabValidator.getString(scan, "\nWould you like to check out a book? Y/N  ");
 						while (user1st.equalsIgnoreCase("y")) {
