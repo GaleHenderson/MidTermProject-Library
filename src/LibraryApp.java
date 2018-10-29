@@ -49,6 +49,9 @@ public class LibraryApp {
 
 						System.out.println(counter++ + ". " + book);
 					}
+					
+				
+					
 					String user1st = LabValidator.getString(scan, "\nWould you like to check out a book? Y/N  ");
 					while (user1st.equalsIgnoreCase("y")) {
 						int userChoiceForBookNumber = LabValidator.getInt(scan,
@@ -138,11 +141,11 @@ public class LibraryApp {
 	}
 
 	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> searchForTitle) {
-
+		String isItOnShelf = "ON SHELF";
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the book your searching for:");
 		int available = 0;
 		for (Book book : searchForTitle) {
-			if (book.getTitle().contains(userSelection.toUpperCase())) {
+			if ((book.getTitle().contains(userSelection.toUpperCase()) && book.getTitle().contains(isItOnShelf))) {
 				System.out.println(book);
 
 				available = available + 1;
@@ -163,7 +166,7 @@ public class LibraryApp {
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry that book has already been checked out or is unavailable! :(");
+			System.out.println("Sorry that book is checked out or  is not apart of our inventory.");
 			System.out.println("What else would you like to do?");
 		}
 		}
