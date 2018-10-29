@@ -130,7 +130,7 @@ public class LibraryApp {
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry that book is checked out or  is not apart of our inventory");
+			System.out.println("Sorry that book is checked out or  is not apart of our inventory.");
 			System.out.println("What else would you like to do?");
 
 		}
