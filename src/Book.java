@@ -55,9 +55,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return String.format("%-28s %-20s %-21s %-1s", title, author, status, dueDate);
-// 		return title + " by " + author + " Status: " + status; //+ "," + dueDate;
-//		return title + "," + author + "," + status + "," + dueDate; 
+		return String.format("%-28s %-20s %-21s %-1s", title, author, status, dueDate); 
 	}
 
 }

@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +46,8 @@ public class LibraryApp {
 					userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 4);
 					if (userChoice == 1) {
 						books = readFromFile(directoryFolder, fileName);
-						int counter = 1;System.out.printf("%-28s %-20s %-20s %-1s", "\tTITLE", " AUTHOR", " STATUS", "RETURN DATE"); // prints list of fruit and prices
+						int counter = 1;
+						System.out.printf("%-28s %-20s %-20s %-1s", "\tTITLE", " AUTHOR", " STATUS", "RETURN DATE"); // prints list of fruit and prices
 						System.out.println();
 						System.out.printf("%-28s %-20s %-20s %-1s", "\t-----", " ------", " ------", "------------"); // prints list of fruit and prices
 						System.out.println();
@@ -65,13 +68,13 @@ public class LibraryApp {
 									System.out.println("This book is due back in 2 weeks.\n");
 									System.out.println("Would you like to continue? Y/N  ");
 									user1st = scan.next();
-
 									if (user1st.equalsIgnoreCase("N")) {
-										System.out.println("Thank you for choosing Grand Circus Library. Goodbye");
+										System.out.println("What else would you like to do? ");
 									}
 								}
 							}
 						}
+						System.out.println("What else would you like to do? ");
 					} else if (userChoice == 2) {
 						searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 					} else if (userChoice == 3) {
@@ -139,8 +142,9 @@ public class LibraryApp {
 	}
 
 	public static void searchForAuthorOfBook(Scanner scan, ArrayList<Book> bookArrayList) {
+		LocalDate today = LocalDate.now();
 		String isItOnShelf = "ON SHELF";
-		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
+		String userSelection = LabValidator.getString(scan, "Please enter the name of the author: ");
 		int available = 0;
 		for (Book book : bookArrayList) {
 			if ((book.getAuthor().contains(userSelection.toUpperCase()) && (book.getStatus().contains(isItOnShelf)))) { 
@@ -148,62 +152,55 @@ public class LibraryApp {
 				available = available + 1;
 			}
 			if (available == 1) {
-
-				String userCheckout = LabValidator.getString(scan,
-						"Would you like to checkout this book? (Yes/y or No/n)");
+				String userCheckout = LabValidator.getString(scan,	"Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
-					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor()
-							+ " for 2 weeks.");
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					System.out.println("Please return this book by: " + today.plus(14,ChronoUnit.DAYS));
 					writeNewStatusToFile(bookArrayList, book);
 					System.out.println("What else would you like to do?");
-
 					break;
 				} else {
 					System.out.println("What else would you like to do?");
+					break;
 				}
 			}
-
 		}
-
 		if (available < 1) {
 			System.out.println("Sorry that book is checked out or  is not apart of our inventory.");
 			System.out.println("What else would you like to do?");
-
 		}
 
 	}
 
-	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> searchForTitle) {
+	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> bookArrayList) {
+		LocalDate today = LocalDate.now();
 		String isItOnShelf = "ON SHELF";
-		String userSelection = LabValidator.getString(scan, "Please enter the name of the book your searching for:");
+		String userSelection = LabValidator.getString(scan, "Please enter the name of the author: ");
 		int available = 0;
-		for (Book book : searchForTitle) {
-			if ((book.getTitle().contains(userSelection.toUpperCase()) && book.getTitle().contains(isItOnShelf))) {
+		for (Book book : bookArrayList) {
+			if ((book.getTitle().contains(userSelection.toUpperCase()) && (book.getStatus().contains(isItOnShelf)))) { 
 				System.out.println(book);
-
 				available = available + 1;
 			}
 			if (available == 1) {
-				String userCheckout = LabValidator.getString(scan,
-						"Would you like to checkout this book? (Yes/y or No/n)");
+				String userCheckout = LabValidator.getString(scan,	"Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
-					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor()
-							+ " for 2 weeks.");
-					writeNewStatusToFile(searchForTitle, book);
-
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					System.out.println("Please return this book by: " + today.plus(14,ChronoUnit.DAYS));
+					writeNewStatusToFile(bookArrayList, book);
 					System.out.println("What else would you like to do?");
 					break;
 				} else {
 					System.out.println("What else would you like to do?");
+					break;
 				}
 			}
-
 		}
-
 		if (available < 1) {
 			System.out.println("Sorry that book is checked out or  is not apart of our inventory.");
 			System.out.println("What else would you like to do?");
 		}
+
 	}
 
 	public static void createFile(String directoryFolder, String fileName) {
