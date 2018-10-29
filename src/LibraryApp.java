@@ -43,7 +43,7 @@ public class LibraryApp {
 					System.out.println("5 - Donate a book");
 					System.out.println("6 - Exit program");
 					
-					userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 4);
+					userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 6);
 					if (userChoice == 1) {
 						books = readFromFile(directoryFolder, fileName);
 						int counter = 1;
@@ -87,10 +87,10 @@ public class LibraryApp {
 						Path filePath = Paths.get(directoryFolder, fileName);
 						File file = filePath.toFile();
 						try {
-							String checkout = "checkout";
-							Book s = new Book(userDonateTitle, userDonateAuthor, checkout, "2 weeks");
+							String status = "On Shelf";
+							String date = "n/a";
 							PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
-							outW.println(s);
+							outW.println(userDonateAuthor+","+userDonateTitle+","+status+","+date);
 							outW.close();
 						} catch (FileNotFoundException e) {
 							// TODO Auto-generated catch block
