@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -31,7 +32,7 @@ public class LibraryApp {
 
 		System.out.println("Welcome to the Grand Circus Library!");
 		System.out.println("What would you like to do today!?");
-		int userPick = LabValidator.getInt(scan, "Press 1 to check out a book or 2 to return a book", 1, 2);
+		int userPick = LabValidator.getInt(scan, "\nPress 1 to check out a book or 2 to return a book:  ", 1, 2);
 		int userChoice = 0;
 
 		if (userPick == 1) {
@@ -40,18 +41,43 @@ public class LibraryApp {
 				System.out.println("2 - Search by the author");
 				System.out.println("3 - Search by the title ");
 				System.out.println("4 - Return to main menu");
+				
 
-				userChoice = LabValidator.getInt(scan, "Enter menu number: ", 1, 5);
+				userChoice = LabValidator.getInt(scan, "\nEnter menu number:  ", 1, 4);
 				if (userChoice == 1) {
 					books = readFromFile(directoryFolder, fileName);
 					int counter = 1;
 					for (Book book : books) {
+						
 						System.out.println(counter++ + ". " + book);
 					}
-					String user1st = LabValidator.getString(scan, "Would you like to check out a book? y/n");
-					if (user1st.equalsIgnoreCase("y")) {
+					String user1st = LabValidator.getString(scan, "\nWould you like to check out a book? Y/N  ");
+					while (user1st.equalsIgnoreCase("y")) {
+						int userChoiceForBookNumber = LabValidator.getInt(scan,
+								"Please select the number that corresponds to the book you'd like to check out:  ",
+								1, 13);
+						for (int i = 0; i < books.size() + 1; i++) {
+							if (userChoiceForBookNumber == i) {
+								System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
+								writeNewStatusToFile(books, books.get(i - 1));
+								System.out.println(
+										books.get(i - 1).getTitle() + " is now " + books.get(i - 1).getStatus());
+								System.out.println("This book is due back in 2 weeks.\n");
+								System.out.println("Would you like to continue? Y/N  ");	
+								user1st = scan.next();
+							
+								 	if (user1st.equalsIgnoreCase("N")) {
+								System.out.println("Thank you for choosing Grand Circus Library. Goodbye");
+								
+							}
+							
+							
+							}
+						}
 
 					}
+
+
 				} else if (userChoice == 2) {
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
 					
@@ -95,7 +121,9 @@ public class LibraryApp {
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					writeNewStatusToFile(bookArrayList , book);
 					System.out.println("What else would you like to do?");
+					
 					break;
 				} else {
 					System.out.println("What else would you like to do?");
@@ -105,7 +133,7 @@ public class LibraryApp {
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry that book has already been checked out or is unavailable! :(");
+			System.out.println("Sorry that book has already been checked out or is unavailable! ");
 			System.out.println("What else would you like to do?");
 
 		}
@@ -126,6 +154,7 @@ public class LibraryApp {
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					writeNewStatusToFile(searchForTitle , book);
 					
 					System.out.println("What else would you like to do?");
 					break;
@@ -190,6 +219,28 @@ public class LibraryApp {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void writeNewStatusToFile(ArrayList<Book> books, Book book) {
+		String directoryFolder = "library";
+		String fileName = "library.txt";
+		Path filePath = Paths.get(directoryFolder, fileName);
+		File file = filePath.toFile();
+		book.setStatus("CHECKED OUT");
+
+
+		try {
+			// the true parameter for the file output stream constructor appends data
+			// to the end of the file. False rewrites over the entire file
+			PrintWriter outW = new PrintWriter(new FileOutputStream(file));
+			for (Book b : books) {
+				outW.println(b.getTitle() + "," + b.getAuthor() + "," + b.getStatus() + "," + b.getDueDate());
+			}
+			outW.close(); // mandatory: this needs to be closed when done or may not write all info
+		} catch (FileNotFoundException e) {
+			System.out.println("The file was not found.");
+		}
+
+	}
 
 	public static ArrayList<Book> readFromFile(String diretoryFolder, String fileName) {
 		Path filePath = Paths.get(diretoryFolder, fileName);
@@ -226,4 +277,5 @@ public class LibraryApp {
 		}
 		return bookList;
 	}
+	
 }
