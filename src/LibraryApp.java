@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -47,13 +46,14 @@ public class LibraryApp {
 					books = readFromFile(directoryFolder, fileName);
 					int counter = 1;
 					for (Book book : books) {
+
 						System.out.println(counter++ + ". " + book);
 					}
 					String user1st = LabValidator.getString(scan, "\nWould you like to check out a book? Y/N  ");
 					while (user1st.equalsIgnoreCase("y")) {
 						int userChoiceForBookNumber = LabValidator.getInt(scan,
-								"Please select the number that corresponds to the book you'd like to check out:  ",
-								1, 13);
+								"Please select the number that corresponds to the book you'd like to check out:  ", 1,
+								13);
 						for (int i = 0; i < books.size() + 1; i++) {
 							if (userChoiceForBookNumber == i) {
 								System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
@@ -61,22 +61,27 @@ public class LibraryApp {
 								System.out.println(
 										books.get(i - 1).getTitle() + " is now " + books.get(i - 1).getStatus());
 								System.out.println("This book is due back in 2 weeks.\n");
-								System.out.println("Would you like to continue? Y/N  ");	
+								System.out.println("Would you like to continue? Y/N  ");
 								user1st = scan.next();
+
+								if (user1st.equalsIgnoreCase("N")) {
+									System.out.println("Thank you for choosing Grand Circus Library. Goodbye");
+
+								}
+
 							}
 						}
 
 					}
 
-
 				} else if (userChoice == 2) {
 					searchForAuthorOfBook(scan, readFromFile(directoryFolder, fileName));
-					
+
 				} else if (userChoice == 3) {
 					SearchForTitleOfBook(scan, readFromFile(directoryFolder, fileName));
 				} else if (userChoice == 4) {
 					int userCheckout = LabValidator.getInt(scan, "Pick a book to checkout from the list: ", 1, 12);
-					
+
 				}
 			} while (!(userChoice == 5));
 		} else if (userPick == 2) {
@@ -96,23 +101,26 @@ public class LibraryApp {
 			}
 		}
 	}
-	
 
 	public static void searchForAuthorOfBook(Scanner scan, ArrayList<Book> bookArrayList) {
-
+        String isItOnShelf = "ON SHELF";
 		String userSelection = LabValidator.getString(scan, "Please enter the name of the author.");
 		int available = 0;
 		for (Book book : bookArrayList) {
-			if (book.getAuthor().contains(userSelection.toUpperCase())) { // added the toUpperCase to make sure user
+			if ((book.getAuthor().contains(userSelection.toUpperCase()) && (book.getStatus().contains(isItOnShelf)))) { // added the toUpperCase to make sure user
 																			// input will be understood by the search
 				System.out.println(book);
 				available = available + 1;
 			}
-			if (available == 1) {
+			if (available ==1) {
+
+				
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					writeNewStatusToFile(bookArrayList , book);
 					System.out.println("What else would you like to do?");
+					
 					break;
 				} else {
 					System.out.println("What else would you like to do?");
@@ -122,11 +130,11 @@ public class LibraryApp {
 		}
 
 		if (available < 1) {
-			System.out.println("Sorry that book has already been checked out or is unavailable! :(");
+			System.out.println("Sorry that book is checked out or  is not apart of our inventory.");
 			System.out.println("What else would you like to do?");
 
 		}
-
+		
 	}
 
 	public static void SearchForTitleOfBook(Scanner scan, ArrayList<Book> searchForTitle) {
@@ -143,6 +151,7 @@ public class LibraryApp {
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					writeNewStatusToFile(searchForTitle , book);
 					
 					System.out.println("What else would you like to do?");
 					break;
@@ -265,4 +274,5 @@ public class LibraryApp {
 		}
 		return bookList;
 	}
+	
 }

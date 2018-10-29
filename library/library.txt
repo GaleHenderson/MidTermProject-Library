@@ -1,13 +1,13 @@
-Pride and Prejudice,Jane Austen,On Shelf,2 weeks
-To Kill A Mockingbird,Harper Lee,On Shelf,2 weeks
-Twilight,Stephenie Meyer,On Shelf,2 weeks
-The Hunger Games, Suzanne Collins, On Shelf, 2 weeks
-Harry Potter, J. K. Rowling, On Shelf, 2 weeks
-The Book Thief, Markus Zusak, On Shelf, 2 weeks
-Animal Farm, George Orwell, On Shelf, 2 weeks
-Gone with the Wind, Margaret Mitchell, On Shelf, 2 weeks
-The Chronicles of Narnia, C. S. Lewis, On Shelf, 2 weeks
-The Fault in Our Stats, John Green, On Shelf, 2 weeks
-The Giving Tree, Shel Silverstein, On Shelf, 2 weeks
-Wuthering Heights, Emily Bronte, On Shelf, 2 weeks
-To Kill A Test,Harper Lee,On Shelf,2 weeks
+PRIDE AND PREJUDICE,JANE AUSTEN,CHECKED OUT,2 WEEKS
+TO KILL A MOCKINGBIRD,HARPER LEE,CHECKED OUT,2 WEEKS
+TWILIGHT,STEPHENIE MEYER,CHECKED OUT,2 WEEKS
+THE HUNGER GAMES, SUZANNE COLLINS,CHECKED OUT, 2 WEEKS
+HARRY POTTER, J. K. ROWLING,CHECKED OUT, 2 WEEKS
+THE BOOK THIEF, MARKUS ZUSAK, ON SHELF, 2 WEEKS
+ANIMAL FARM, GEORGE ORWELL,CHECKED OUT, 2 WEEKS
+GONE WITH THE WIND, MARGARET MITCHELL,CHECKED OUT, 2 WEEKS
+THE CHRONICLES OF NARNIA, C. S. LEWIS, ON SHELF, 2 WEEKS
+THE FAULT IN OUR STATS, JOHN GREEN, ON SHELF, 2 WEEKS
+THE GIVING TREE, SHEL SILVERSTEIN,CHECKED OUT, 2 WEEKS
+WUTHERING HEIGHTS, EMILY BRONTE,CHECKED OUT, 2 WEEKS
+TO KILL A TEST,HARPER LEE,ON SHELF,2 WEEKS
