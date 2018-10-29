@@ -63,6 +63,7 @@ public class LibraryApp {
 								if (userChoiceForBookNumber == i) {
 									System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
 									writeNewStatusToFile(books, books.get(i - 1));
+									writeNewDueDateToFile(books, books.get(i - 1));
 									System.out.println(
 											books.get(i - 1).getTitle() + " is now " + books.get(i - 1).getStatus());
 									System.out.println("This book is due back in 2 weeks.\n");
@@ -110,6 +111,7 @@ public class LibraryApp {
 			}
 			if (available == 1) {
 				writeOldStatusToFile(bookArrayList, book);
+				writeOldDueDateToFile(bookArrayList, book);
 				System.out.println("Thank you for returning this book!");
 				break;
 			}
@@ -126,6 +128,27 @@ public class LibraryApp {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		File file = filePath.toFile();
 		book.setStatus("ON SHELF");
+
+		try {
+			// the true parameter for the file output stream constructor appends data
+			// to the end of the file. False rewrites over the entire file
+			PrintWriter outW = new PrintWriter(new FileOutputStream(file));
+			for (Book b : books) {
+				outW.println(b.getTitle() + "," + b.getAuthor() + "," + b.getStatus() + "," + b.getDueDate());
+			}
+			outW.close(); // mandatory: this needs to be closed when done or may not write all info
+		} catch (FileNotFoundException e) {
+			System.out.println("The file was not found.");
+		}
+
+	}
+	
+	public static void writeOldDueDateToFile(ArrayList<Book> books, Book book) {
+		String directoryFolder = "library";
+		String fileName = "library.txt";
+		Path filePath = Paths.get(directoryFolder, fileName);
+		File file = filePath.toFile();
+		book.setDueDate("N/A");
 
 		try {
 			// the true parameter for the file output stream constructor appends data
@@ -157,6 +180,7 @@ public class LibraryApp {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
 					System.out.println("Please return this book by: " + today.plus(14,ChronoUnit.DAYS));
 					writeNewStatusToFile(bookArrayList, book);
+					writeNewDueDateToFile(bookArrayList, book);
 					System.out.println("What else would you like to do?");
 					break;
 				} else {
@@ -188,6 +212,7 @@ public class LibraryApp {
 					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
 					System.out.println("Please return this book by: " + today.plus(14,ChronoUnit.DAYS));
 					writeNewStatusToFile(bookArrayList, book);
+					writeNewDueDateToFile(bookArrayList, book);
 					System.out.println("What else would you like to do?");
 					break;
 				} else {
@@ -258,6 +283,27 @@ public class LibraryApp {
 		Path filePath = Paths.get(directoryFolder, fileName);
 		File file = filePath.toFile();
 		book.setStatus("CHECKED OUT");
+
+		try {
+			// the true parameter for the file output stream constructor appends data
+			// to the end of the file. False rewrites over the entire file
+			PrintWriter outW = new PrintWriter(new FileOutputStream(file));
+			for (Book b : books) {
+				outW.println(b.getTitle() + "," + b.getAuthor() + "," + b.getStatus() + "," + b.getDueDate());
+			}
+			outW.close(); // mandatory: this needs to be closed when done or may not write all info
+		} catch (FileNotFoundException e) {
+			System.out.println("The file was not found.");
+		}
+
+	}
+	
+	public static void writeNewDueDateToFile(ArrayList<Book> books, Book book) {
+		String directoryFolder = "library";
+		String fileName = "library.txt";
+		Path filePath = Paths.get(directoryFolder, fileName);
+		File file = filePath.toFile();
+		book.setDueDate("2 Weeks");
 
 		try {
 			// the true parameter for the file output stream constructor appends data
