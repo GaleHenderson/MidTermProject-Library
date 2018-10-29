@@ -34,6 +34,9 @@ public class Book {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getStatus() {
+		return status;
+	}
 	public String getDueDate() {
 		return dueDate;
 	}

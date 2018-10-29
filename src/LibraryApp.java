@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class LibraryApp {
 	public static void main(String[] args) {
 
@@ -56,6 +57,9 @@ public class LibraryApp {
 						for (int i = 0; i < books.size() + 1; i++) {
 							if (userChoiceForBookNumber == i) {
 								System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
+								writeNewStatusToFile(books, books.get(i - 1));
+								System.out.println(
+										books.get(i - 1).getTitle() + " is now " + books.get(i - 1).getStatus());
 								System.out.println("This book is due back in 2 weeks.\n");
 								System.out.println("Would you like to continue? Y/N  ");	
 								user1st = scan.next();
@@ -202,6 +206,28 @@ public class LibraryApp {
 			System.out.println("The file was not found");
 			e.printStackTrace();
 		}
+	}
+	
+	public static void writeNewStatusToFile(ArrayList<Book> books, Book book) {
+		String directoryFolder = "library";
+		String fileName = "library.txt";
+		Path filePath = Paths.get(directoryFolder, fileName);
+		File file = filePath.toFile();
+		book.setStatus("CHECKED OUT");
+
+
+		try {
+			// the true parameter for the file output stream constructor appends data
+			// to the end of the file. False rewrites over the entire file
+			PrintWriter outW = new PrintWriter(new FileOutputStream(file));
+			for (Book b : books) {
+				outW.println(b.getTitle() + "," + b.getAuthor() + "," + b.getStatus() + "," + b.getDueDate());
+			}
+			outW.close(); // mandatory: this needs to be closed when done or may not write all info
+		} catch (FileNotFoundException e) {
+			System.out.println("The file was not found.");
+		}
+
 	}
 
 	public static ArrayList<Book> readFromFile(String diretoryFolder, String fileName) {
