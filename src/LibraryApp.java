@@ -90,14 +90,20 @@ public class LibraryApp {
 					String status = "On Shelf";
 					String date = "n/a";
 					PrintWriter outW = new PrintWriter(new FileOutputStream(file, true));
-					outW.println(userDonateAuthor + "," + userDonateTitle + "," + status + "," + date);
+					outW.println(userDonateTitle + "," + userDonateAuthor + "," + status + "," + date);
 					outW.close();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				System.out.println("Thank you for your donation!");
 			}
 		} while (!(userChoice == 6));
+	
+		System.out.println("Goodbye");
+		System.out.println("Thank you for visiting our Library Terminal");
+	
+	
 	}
 	
 	// Create Directory Method
@@ -203,7 +209,7 @@ public class LibraryApp {
 			if (available == 1) {
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
-					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor() + " for 2 weeks.");
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor());
 					System.out.println("Please return this book by: " + today.plus(14, ChronoUnit.DAYS));
 					writeNewStatusToFile(bookArrayList, book);
 					writeNewDueDateToFile(bookArrayList, book);
@@ -235,7 +241,7 @@ public class LibraryApp {
 			if (available == 1) {
 				String userCheckout = LabValidator.getString(scan, "Would you like to checkout this book? (Yes/y or No/n)");
 				if (userCheckout.equalsIgnoreCase("yes") || userCheckout.equalsIgnoreCase("y")) {
-					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor()	+ " for 2 weeks.");
+					System.out.println("Congrats! You have checked out " + book.getTitle() + " by " + book.getAuthor());
 					System.out.println("Please return this book by: " + today.plus(14, ChronoUnit.DAYS));
 					writeNewStatusToFile(bookArrayList, book);
 					writeNewDueDateToFile(bookArrayList, book);
