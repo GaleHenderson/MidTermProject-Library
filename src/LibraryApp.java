@@ -61,16 +61,16 @@ public class LibraryApp {
 							"Please select the number that corresponds to the book you'd like to check out:  ", 1, 13);
 					for (int i = 0; i < books.size() + 1; i++) {
 						if (userChoiceForBookNumber == i) {
-							System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
+//							System.out.println("\nYou've checked out " + books.get(i - 1) + ".");
 							writeNewStatusToFile(books, books.get(i - 1));
 							writeNewDueDateToFile(books, books.get(i - 1));
 							System.out.println(books.get(i - 1).getTitle() + " is now " + books.get(i - 1).getStatus());
 							System.out.println("This book is due back in 2 weeks.\n");
 							System.out.println("Would you like to continue? Y/N  ");
 							user1st = scan.next();
-							if (user1st.equalsIgnoreCase("N")) {
-								System.out.println("What else would you like to do? ");
-							}
+////							if (user1st.equalsIgnoreCase("N")) {
+////								System.out.println("What else would you like to do? ");
+//							}
 						}
 					}
 				}
