@@ -32,7 +32,7 @@ public class LibraryApp {
 		ArrayList<Book> books = new ArrayList<>();
 
 		// Greeting
-		System.out.println("Welcome to the Grand Circus Library!");
+		System.out.println("Welcome to the Grand Circus Library!\n");
 		System.out.println("What would you like to do today!?");
 		int userChoice = 0;
 
@@ -48,7 +48,7 @@ public class LibraryApp {
 			if (userChoice == 1) {
 				books = readFromFile(directoryFolder, fileName);
 				int counter = 1;
-				System.out.printf("%-28s %-20s %-20s %-1s", "\tTITLE", " AUTHOR", " STATUS", "RETURN DATE"); 
+				System.out.printf("\n%-28s %-20s %-20s %-1s", "\tTITLE", " AUTHOR", " STATUS", "RETURN DATE"); 
 				System.out.println();
 				System.out.printf("%-28s %-20s %-20s %-1s", "\t-----", " ------", " ------", "------------"); 
 				System.out.println();
